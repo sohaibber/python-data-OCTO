@@ -14,10 +14,10 @@ from src.models.kneighbors_classifier_model import KNeighborsModel
 from src.models.random_forest_model import RandomForestModel
 from src.utils import PlotUtils
 
-#2 paths for data
+
 class TrainingPipeline:
     def __init__(self):
-        df = pd.read_csv(DATASET_PATH).iloc[:5000,:] # to update with new dataset path
+        df = pd.read_csv(DATASET_PATH)
         df.drop('Time', axis=1, inplace=True)
 
         features = df.drop('Class', axis=1).values
