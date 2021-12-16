@@ -19,7 +19,8 @@ class Transaction(db.Model):
 
 
     def __repr__(self):
-        return '<Transaction %r>' % self.prediction
+        
+        return str('{'+f'"V11":{self.v0}, "V15":{self.v1},"V13":{self.v3}, "Amount":{self.v2},  "prediction":{self.prediction}'+'}')
 
 db.create_all()
 db.session.commit()

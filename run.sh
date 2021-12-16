@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #Run API
-export FLASK_APP=src/api/app.py
+export FLASK_APP=src/api/
 API_PID_FILE=api_pid.txt
 if test -f "$API_PID_FILE";
 then
