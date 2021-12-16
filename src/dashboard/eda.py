@@ -6,9 +6,7 @@ import seaborn as sns
 
 def EDA(df):
     st.title("Exploratory Data Analysis")
-    st.info("In this section, you are invited to create insightful graphs "
-            "about the card fraud dataset that you were provided.")
-
+    
 
     st.header("Dataset details")
     st.subheader("Head of DataSet")

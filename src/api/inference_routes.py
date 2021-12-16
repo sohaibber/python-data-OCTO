@@ -3,6 +3,8 @@ from src.constants import AGGREGATOR_MODEL_PATH
 from src.models.aggregator_model import AggregatorModel
 import numpy as np
 from flask import jsonify
+import json
+# from bson import json_util
 
 model = AggregatorModel()
 model.load(AGGREGATOR_MODEL_PATH)
@@ -17,7 +19,7 @@ def index():
 @blueprint.route('/inference', methods=['GET', 'POST'])
 def run_inference():
     from src.api.app import Transaction
-    from src.api.db import db
+    from src.api.db import db 
     if request.method == 'POST':
         features = np.array(request.json).reshape(1, -1)
         prediction = model.predict(features)
@@ -31,5 +33,11 @@ def run_inference():
         return str(prediction[0])
     elif request.method == 'GET':
         transactions = Transaction.query.all()
-        return str([{"v0": transaction.v0, "v1": transaction.v1, "v2": transaction.v2, "v3": transaction.v3, "prediction": transaction.prediction} for transaction in transactions])
+        dictio = {}
+        i=1
+        for tr in transactions:
+                dictio[str(i)]=json.loads(str(tr))
+                i+=1
+        
+        return dictio
 

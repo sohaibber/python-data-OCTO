@@ -41,7 +41,7 @@ class TrainingPipeline:
 
 
         models_dict = {'decisiontree': DecisionTreeModel(), 'svc': SVCModel(),'randomforest':RandomForestModel() ,'knn':KNeighborsModel(),'logisticregression':LogisticRegressionModel()}
-        # add checkbox  to avoid non existing keys( model names)
+       
         models = model_name.split(',')
         
 

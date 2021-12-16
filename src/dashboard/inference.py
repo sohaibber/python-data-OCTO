@@ -3,12 +3,19 @@ import requests
 import matplotlib.pyplot as plt
 import time 
 from src.constants import INFERENCE_EXAMPLE
+from json import loads
+import pandas as pd
+import json 
+
 
 def get_data():
     geted_result = requests.get(
                        'http://localhost:5000/api/inference',
-                   )
-    st.write(geted_result.text)
+                   ).text
+    
+    
+    df = pd.read_json(geted_result, orient='index')
+    st.table(df)
 
 def Inference():
        st.header("Fraud Inference")
@@ -26,7 +33,7 @@ def Inference():
        INFERENCE_EXAMPLE[15] = feature_15
        INFERENCE_EXAMPLE[28] = amount
 
-       get_data()
+       
        
 
        if infer:
@@ -37,13 +44,14 @@ def Inference():
                        'http://localhost:5000/api/inference',
                        json=INFERENCE_EXAMPLE
                    )
-                   get_data()
+                   
                    if int(int(result.text) == 1):
                        st.success('Done!')
                        st.metric(label="Status", value="Transaction: Fraudulent")
                    else:
                        st.success('Done!')
                        st.metric(label="Status", value="Transaction: Clear")
+                   get_data() 
                except Exception as e:
                    st.error('Failed to call Inference API!')
                    st.exception(e)
