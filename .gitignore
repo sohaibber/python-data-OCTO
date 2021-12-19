@@ -131,3 +131,5 @@ dmypy.json
 input/
 input/*
 .git/
+streamlit_pid.txt
+api_pid.txt
